@@ -17,3 +17,16 @@ hello <- function() {
   print("Hello, world!")
 }
 
+
+whittaker_henderson <- function(y, lambda = 100, d = 2, w = NULL) {
+  n <- length(y)
+  if (is.null(w)) w <- rep(1, n)
+  W <- diag(w)
+  K <- diff(diag(n), differences = d)
+  A <- W + lambda * t(K) %*% K
+  b <- W %*% y
+  y_lisse <- solve(A, b)
+  return(as.vector(y_lisse))
+}
+
+## Test
